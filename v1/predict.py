@@ -122,13 +122,13 @@ def json_to_html(elementDict, name="0"):
 
         # element
         if i["element"] == "checkbox":
-            element = f'<div  style="grid-column:{x} / span {w};grid-row:{y} / span {h};"><label class="switch"> <input type="checkbox"><span class="slider round"></span></label></div>'
+            element = f'<div class="c-checkbox" style="grid-column:{x} / span {w};grid-row:{y} / span {h};"><label class="switch"> <input type="checkbox"><span class="slider round"></span></label></div>'
         
         elif i["element"] == "heading":
             element = f'<h1 style="grid-column:{x} / span {w};grid-row:{y} / span {h};">Title</h1>'
         
         elif i["element"] == "picture":
-            element = f'<div class="c-image" style="height:{h * 32}px;grid-column:{x} / span {w};grid-row:{y} / span {h};"></div>'
+            element = f'<div class="c-image" style="min-height:{h * 32}px;grid-column:{x} / span {w};grid-row:{y} / span {h};"></div>'
         
         elif i["element"] == "text":
 
