@@ -129,7 +129,7 @@ def get_html_element(item, containerWidth, containerHeight):
         element = f'<div class="c-frame" style="min-height:{h * gridamountY / 2}px;min-width:{w * gridamountX / 4}px;grid-column:{x} / span {w};grid-row:{y} / span {h};"></div>'
     
     elif item["element"] == "text":
-        loremText = lorem.paragraphs(1)
+        loremText = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
         element = f'<div class="c-text" style="max-height:{h * 128}px;max-width:{w * 64}px;grid-column:{x} / span {w};grid-row:{y} / span {h};"><p>{loremText}</p></div>'
     
     elif item['element'] == "button":
