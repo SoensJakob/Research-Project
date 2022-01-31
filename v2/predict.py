@@ -77,7 +77,7 @@ def predict(model, input):
 
     filtered_boxes, filtered_labels = merge_bounding_box(5, filtered_boxes, filtered_labels)
 
-    # show_labeled_image(image, filtered_boxes, filtered_labels)
+    show_labeled_image(image, filtered_boxes, filtered_labels)
     return filtered_boxes, filtered_labels
 
 def prediction_to_json(filtered_boxes, filtered_labels, image):
@@ -143,13 +143,13 @@ def get_html_element(item, containerWidth, containerHeight):
     
     return element
 
-def json_to_html(elementDict, width, height, name="0"):
+def json_to_html(elementDict, width, height, name="result"):
 
     gridamountX = int(width / 20)
     gridamountY = int(height / 20)
 
     try: 
-        shutil.copytree("placeholder", f"result-{name}") 
+        shutil.copytree("placeholder", f"{name}") 
 
     except Exception as e: 
         print(e)  
