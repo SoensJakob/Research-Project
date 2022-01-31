@@ -49,12 +49,3 @@
 #     i["pos"] = grid
 
 #     print(i)
-
-
-import torch
-import numpy as np
-import json, itertools, argparse, os
-import shutil, lorem
-from lorem.text import TextLorem
-
-print(lorem.paragraph() + "\n" +  lorem.paragraph())
