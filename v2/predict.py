@@ -205,7 +205,7 @@ def json_to_html(elementDict, width, height, name="result"):
         htmlDoc = f'<!DOCTYPE html> <html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>result</title><link rel="stylesheet" href="css/normalize.css"><link rel="stylesheet" href="https://use.typekit.net/hwf3rrs.css"><link rel="stylesheet" href="css/screen.css"><script src="script/app.js"></script></head><body><div class="o-container">    <div class="c-content o-row">{htmlString}</div></div></body></html>'
     
     try:
-        with open(f'result-{name}/index.html', 'w') as outfile:
+        with open(f'{name}/index.html', 'w') as outfile:
             outfile.write(htmlDoc)
     except Exception as e:
         print(e) 
