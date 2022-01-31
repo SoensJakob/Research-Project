@@ -1,5 +1,0 @@
-train: ../test/train/images
-val: ../test/valid/images
-
-nc: 4
-names: ['0', '1', '2', '3']
