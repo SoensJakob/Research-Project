@@ -77,7 +77,7 @@ def predict(model, input):
 
     filtered_boxes, filtered_labels = merge_bounding_box(5, filtered_boxes, filtered_labels)
 
-    show_labeled_image(image, filtered_boxes, filtered_labels)
+    # show_labeled_image(image, filtered_boxes, filtered_labels)
     return filtered_boxes, filtered_labels
 
 def prediction_to_json(filtered_boxes, filtered_labels, image):
@@ -101,42 +101,48 @@ def prediction_to_json(filtered_boxes, filtered_labels, image):
     # with open(f'json/{args.input[:-4]}.json', 'w') as outfile:
     #   outfile.write(jsonString)
 
-def get_html_element(item, containerWidth, containerHeight):
+def get_html_element(item, containerWidth, containerHeight, containerX=0, containerY=0):
     
 
     gridamountX = int(containerWidth / 20 )
     gridamountY = int(containerHeight / 20 )
 
-    x = round((item['Xmin'] / gridamountX)) + 1
-    y = round((item['Ymin'] / gridamountY)) + 1
+    trueX = item['Xmin'] - containerX
+    trueY = item['Ymin'] - containerY
 
-    w = round(((item["Xmax"] - item["Xmin"]) / gridamountX))
-    h = round(((item["Ymax"] - item["Ymin"]) / gridamountY))
+    xMax = item['Xmax'] - containerX
+    yMax = item['Ymax'] - containerY
+    
+    x = round((trueX / gridamountX)) + 1
+    y = round((trueY / gridamountY)) + 1 
+
+    w = round(((xMax- trueX) / gridamountX))
+    h = round(((yMax - trueY) / gridamountY))
 
     if item["element"] == "nav":
         element = f'<div class="c-app__topbar js-nav" style="grid-column:{x} / span {w};"> <div class="c-app__mobile-nav js-nav-btn"><svg class="c-app__nav-button" xmlns="http://www.w3.org/2000/svg" width="18" height="16" viewBox="0 0 18 16"><g id="SideMenu" transform="translate(-21.5 -26.5)"><g id="Group_6" data-name="Group 6" transform="translate(21.5 27.5)"><line id="Line_1" data-name="Line 1" x2="18" fill="none" stroke="#333" stroke-width="2"/><line id="Line_2" data-name="Line 2" x2="10" transform="translate(4 7)" fill="none" stroke="#333" stroke-width="2"/><line id="Line_3" data-name="Line 3" x2="18" transform="translate(0 14)" fill="none" stroke="#333" stroke-width="2"/></g></g></svg></div>  <div class="c-app__nav"><nav class="c-nav"><ul class="o-list c-nav__list js-nav-list"><a href="#about" class="c-nav__link"><li class="c-nav__item">About</li></a><a href="#experience" class="c-nav__link"><li class="c-nav__item">Experience</li></a><a href="#projects" class="c-nav__link"><li class="c-nav__item">Projects</li></a><a href="#contact" class="c-nav__link"><li class="c-nav__item">Contact    </li></a>  </ul></nav></div></div>'
         
     elif item['element'] == "input":
-        element = f'<div class="c-input" style="grid-column:{x} / span {w};"><input type="text" /></div>'
+        element = f'<div  style="grid-column:{x} / span {w};grid-row:{y} / span {h};"><input class="c-input" type="text" placeholder="name"/></div>'
     
     elif item["element"] == "checkbox":
-        element = f'<div class="c-checkbox" style="grid-column:{x} / span {w};"><label class="switch"> <input type="checkbox"><span class="slider round"></span></label></div>'
+        element = f'<div class="c-checkbox" style="grid-column:{x} / span {w};grid-row:{y} / span {h};"><label class="switch"> <input type="checkbox"><span class="slider round"></span></label></div>'
     
     elif item["element"] == "heading":
-        element = f'<h1 class="c-heading" style="grid-column:{x} / span {w};">Title</h1>'
+        element = f'<h1 class="c-heading" style="grid-column:{x} / span {w};grid-row:{y} / span {h};">Portfolio</h1>'
     
     elif item["element"] == "frame":
-        element = f'<div class="c-frame" style="min-height:{h * gridamountY / 2}px;min-width:{w * gridamountX / 4}px;grid-column:{x} / span {w};"></div>'
+        element = f'<div class="c-frame" style="min-height:{h * gridamountY / 2}px;min-width:{w * gridamountX / 4}px;grid-column:{x} / span {w};grid-row:{y} / span {h};"></div>'
     
     elif item["element"] == "text":
-        loremText = lorem.paragraphs(1)
-        element = f'<div class="c-text" style="max-height:{h * 128}px;max-width:{w * 64}px;grid-column:{x} / span {w};"><p>{loremText}</p></div>'
+        loremText = "Our external client was Jimber, IT security provider based in Oostkamp Jimber wanted to see if it was possible to create an indoor tracking app using bluetooth beacons. We created an app in Flutter using existing libraries that gathered data from the bluetooth beacons. This data was sent to a k-nearest neighbor model, then we could track the location and display it in the app" 
+        element = f'<div class="c-text" style="max-height:{h * 128}px;max-width:{w * 64}px;grid-column:{x} / span {w};grid-row:{y} / span {h};"><p>{loremText}</p></div>'
     
     elif item['element'] == "button":
-        element = f'<a href="#" class="c-nav__link c-button" style="max-width:164px;grid-column:{x} / span {w};">Button</a>'
+        element = f'<a href="#" class="c-nav__link c-button" style="max-width:164px;grid-column:{x} / span {w};grid-row:{y} / span {h};">Resume</a>'
 
     elif item['element'] == "footer":
-        element = f'<div class="c-footer" style="max-height:{h * gridamountY}px;grid-column:{x} / span {w};"> <p>footer</p></div>'
+        element = f'<div class="c-footer" style="max-height:{h * gridamountY}px;grid-column:{x} / span {w};"> <p>by Jakob Soens</p></div>'
     
     else:
         return ""
@@ -158,7 +164,6 @@ def json_to_html(elementDict, width, height, name="result"):
 
     Y_priority = sorted(elementDict, key=lambda d: d['Ymin'])
 
-    in_container = []
 
     htmlContainer = ""
 
@@ -187,9 +192,8 @@ def json_to_html(elementDict, width, height, name="result"):
 
                 if (i["Xmin"] <= (j['Xmax'] - (elementWidth / 2)) <= i["Xmax"] and (i["Ymin"] <= (j['Ymax'] - (elementHeight / 2)) <= i["Ymax"])):
                     Y_priority.remove(j)
-                    in_container.append(j)
 
-                    container += get_html_element(j, trueWidth, trueHeight) + "\n"
+                    container += get_html_element(j, trueWidth, trueHeight, i['Xmin'], i['Ymin']) + "\n"
             htmlContainer += container + "</div>\n"    
     
     htmlString = ""

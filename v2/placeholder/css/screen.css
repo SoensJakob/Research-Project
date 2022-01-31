@@ -48,13 +48,13 @@ html {
 */
 
 ::-moz-selection {
-    background: orange;
+    background: #1ab6ff;
     color: white;
     text-shadow: none;
 }
 
 ::selection {
-    background: orange;
+    background: #1ab6ff;
     color: white;
     text-shadow: none;
 }
@@ -159,18 +159,18 @@ hr {
 }
 
 a {
-    color: orange;
+    color: #1ab6ff;
     transition: all .1s ease-in-out;
 }
 
 a:visited,
 a:active {
-    color: orange;
+    color: #1ab6ff;
 }
 
 a:hover,
 a:focus {
-    color: orange;
+    color: #1ab6ff;
 }
 
 /*------------------------------------*\
@@ -433,7 +433,7 @@ a:focus {
     align-items: center;
     background-color: #fff;
     background: linear-gradient(180deg, rgba(255,255,255,1) 70%, rgba(255,255,255,0.9) 100%); 
-    padding:  16px 64px;
+    padding:  16px 0;
     z-index: 100;
   }
 
@@ -447,7 +447,12 @@ a:focus {
     margin:16px 0;
     display: grid;
     width: 100%;
+    grid-template-rows: auto;
     gap: 5px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.025), 0 2px 10px rgba(0,0,0,.1);
+    background-color: #F8F8F8;
+    padding:24px;
+    border-radius: 4px;
 }
 
 .c-checkbox {
@@ -471,15 +476,13 @@ a:focus {
     line-height: 2.3;
     overflow: hidden;
 }
-.c-input {
-    margin: 8px 4px;
-}
+
 
 .c-button {
-    border:1px solid #6DD177;
+    border:1px solid #1ab6ff;
     padding: 4px 21px;
     border-radius: 4px;
-    background-color: #E1F6E3;
+    background-color: #1ab6ff4d;
     box-shadow: 0 0 0 1px rgba(0,0,0,.025), 0 2px 6px rgba(0,0,0,.05);
     transition: background-color .2s;
     cursor: pointer;
@@ -494,7 +497,7 @@ a:focus {
 
 .c-button:hover, 
 .c-button:focus {
-    background-color: #BCEEC1;
+    background-color: #1ab6ff;
     color: #1a1c1d;
 }
 
@@ -662,7 +665,21 @@ a:focus {
   .slider.round:before {
     border-radius: 50%;
   } 
-  
+
+  .c-input {
+    margin: 8px 4px;
+    padding:4px;
+    border-radius: 4px;
+    font-family: objektiv-mk1, "sans-serif";
+    outline:none;
+    box-shadow:0 0 0 1px rgba(0,0,0,.025), 0 2px 6px rgba(0,0,0,.05);
+    border:2px solid #1ab6ff4d;
+    transition:border .2s;
+}
+
+.c-input:focus {
+    border:2px solid #1ab6ff;
+}
 /*------------------------------------*\
 #UTILITIES
 \*------------------------------------*/
