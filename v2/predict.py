@@ -77,7 +77,7 @@ def predict(model, input):
 
     filtered_boxes, filtered_labels = merge_bounding_box(5, filtered_boxes, filtered_labels)
 
-    # show_labeled_image(image, filtered_boxes, filtered_labels)
+    show_labeled_image(image, filtered_boxes, filtered_labels)
     return filtered_boxes, filtered_labels
 
 def prediction_to_json(filtered_boxes, filtered_labels, image):
@@ -120,7 +120,7 @@ def get_html_element(item, containerWidth, containerHeight, containerX=0, contai
     h = round(((yMax - trueY) / gridamountY))
 
     if item["element"] == "nav":
-        element = f'<div class="c-app__topbar js-nav" style="grid-column:{x} / span {w};"> <div class="c-app__mobile-nav js-nav-btn"><svg class="c-app__nav-button" xmlns="http://www.w3.org/2000/svg" width="18" height="16" viewBox="0 0 18 16"><g id="SideMenu" transform="translate(-21.5 -26.5)"><g id="Group_6" data-name="Group 6" transform="translate(21.5 27.5)"><line id="Line_1" data-name="Line 1" x2="18" fill="none" stroke="#333" stroke-width="2"/><line id="Line_2" data-name="Line 2" x2="10" transform="translate(4 7)" fill="none" stroke="#333" stroke-width="2"/><line id="Line_3" data-name="Line 3" x2="18" transform="translate(0 14)" fill="none" stroke="#333" stroke-width="2"/></g></g></svg></div>  <div class="c-app__nav"><nav class="c-nav"><ul class="o-list c-nav__list js-nav-list"><a href="#about" class="c-nav__link"><li class="c-nav__item">About</li></a><a href="#experience" class="c-nav__link"><li class="c-nav__item">Experience</li></a><a href="#projects" class="c-nav__link"><li class="c-nav__item">Projects</li></a><a href="#contact" class="c-nav__link"><li class="c-nav__item">Contact    </li></a>  </ul></nav></div></div>'
+        element = f'<div class="c-app__topbar js-nav" style="grid-column:{x} / span {w};grid-row:{y} / span {h};"> <div class="c-app__mobile-nav js-nav-btn"><svg class="c-app__nav-button" xmlns="http://www.w3.org/2000/svg" width="18" height="16" viewBox="0 0 18 16"><g id="SideMenu" transform="translate(-21.5 -26.5)"><g id="Group_6" data-name="Group 6" transform="translate(21.5 27.5)"><line id="Line_1" data-name="Line 1" x2="18" fill="none" stroke="#333" stroke-width="2"/><line id="Line_2" data-name="Line 2" x2="10" transform="translate(4 7)" fill="none" stroke="#333" stroke-width="2"/><line id="Line_3" data-name="Line 3" x2="18" transform="translate(0 14)" fill="none" stroke="#333" stroke-width="2"/></g></g></svg></div>  <div class="c-app__nav"><nav class="c-nav"><ul class="o-list c-nav__list js-nav-list"><a href="#about" class="c-nav__link"><li class="c-nav__item">About</li></a><a href="#experience" class="c-nav__link"><li class="c-nav__item">Experience</li></a><a href="#projects" class="c-nav__link"><li class="c-nav__item">Projects</li></a><a href="#contact" class="c-nav__link"><li class="c-nav__item">Contact    </li></a>  </ul></nav></div></div>'
         
     elif item['element'] == "input":
         element = f'<div  style="grid-column:{x} / span {w};grid-row:{y} / span {h};"><input class="c-input" type="text" placeholder="name"/></div>'
@@ -142,7 +142,7 @@ def get_html_element(item, containerWidth, containerHeight, containerX=0, contai
         element = f'<a href="#" class="c-nav__link c-button" style="max-width:164px;grid-column:{x} / span {w};grid-row:{y} / span {h};">Resume</a>'
 
     elif item['element'] == "footer":
-        element = f'<div class="c-footer" style="max-height:{h * gridamountY}px;grid-column:{x} / span {w};"> <p>by Jakob Soens</p></div>'
+        element = f'<div class="c-footer" style="max-height:{h * gridamountY}px;grid-column:{x} / span {w};grid-row:{y} / span {h};"> <p>by Jakob Soens</p></div>'
     
     else:
         return ""
@@ -183,7 +183,7 @@ def json_to_html(elementDict, width, height, name="result"):
             new_list = Y_priority.copy()
             new_list.remove(i)
             
-            container = f'<div class="c-container" style="grid-column:{x} / span {w};">\n'
+            container = f'<div class="c-container" style="grid-column:{x} / span {w};grid-row:{y} / span {h};">\n'
 
             for j in new_list:
 
