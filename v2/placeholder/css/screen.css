@@ -512,9 +512,6 @@ a:focus {
         display: block;
     }
 
-    .c-container {
-        gap:0px;
-    }
     
     .c-app__mobile-nav {
         display: block;
