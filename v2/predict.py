@@ -233,7 +233,7 @@ if __name__ == "__main__":
     jsonList = prediction_to_json(filtered_boxes, filtered_labels, args.input)
 
     image = PIL.Image.open(args.input)
-
+    
     width, height = image.size
 
     json_to_html(jsonList, width, height, args.name)

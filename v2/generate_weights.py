@@ -28,7 +28,7 @@ if __name__ == "__main__":
 
     losses = model.fit(loader, test_set, epochs=15, lr_step_size=5, learning_rate=0.001, verbose=True)
 
-    # plt.plot(losses)
-    # plt.show()
+    plt.plot(losses)
+    plt.show()
 
     model.save("model_weights_v2.pth")
