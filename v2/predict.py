@@ -68,6 +68,20 @@ def predict(model, input):
     predictions = model.predict(image)
     labels, boxes, scores = predictions
 
+    # print("1st")
+    # print(labels, boxes, scores)
+    # print("predictions")
+    # print(predictions)
+    # print("visualize")
+    # show_labeled_image(image, boxes, labels)
+
+    # predictions = model.predict_top(image)
+    # labels, boxes, scores = predictions
+    # show_labeled_image(image, boxes, labels)
+    # images = [utils.read_image("data/testset/0.jpg"),utils.read_image("data/testset/1.jpg"),utils.read_image("data/testset/2.jpg")]
+    # print("visualize plot")
+    # plot_prediction_grid(model, images)
+
 
     filtered_indices=np.where(scores>thresh)
     filtered_scores=scores[filtered_indices]
@@ -92,6 +106,7 @@ def prediction_to_json(filtered_boxes, filtered_labels, image):
             "Xmax": float(filtered_boxes[i][2]),
             "Ymax": float(filtered_boxes[i][3]),
         }
+        print(tempDict)
         jsonList.append(tempDict)
 
     return jsonList
